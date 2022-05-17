@@ -1,15 +1,26 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 
-const Create = () => {
+const Create = (props) => {
     const [title, setTitle] = useState("")
     const [price, setPrice] = useState()
     const [description, setDescription] = useState("")
 
     const handleSubmit = (e) => {
+        e.preventDefault()
         axios.post(`http://localhost:8000/api/products`, {title, price, description})
-            .then(response => console.log(response))
+            .then(response => {
+                console.log(response)
+                props.reloadList()
+                clearForm()
+            })
             .catch(err => console.log(err))
+    }
+
+    const clearForm = () => {
+        setTitle("")
+        setPrice("")
+        setDescription("")
     }
 
     return (
