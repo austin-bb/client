@@ -7,7 +7,8 @@ import ProductList from '../components/ProductList';
 
 const Dashboard = (props) => {
     const [products, setProducts] = useState([]);
-    
+    const [refresh, setrefresh] = useState(true)
+
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/products`)
@@ -15,15 +16,19 @@ const Dashboard = (props) => {
                 setProducts(response.data)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [refresh]);
+
+
+    const reload = () => {
+        setrefresh(!refresh)
+    }
+
 
     return (
         <div>
-            <CreateForm />
+            <CreateForm reloadList={reload} />
             <hr/>
-            
-            <ProductList products={products}/>
-        
+            <ProductList products={products} reloadList={reload} />        
         </div>
     )
 }
