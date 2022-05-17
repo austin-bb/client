@@ -8,10 +8,10 @@ function App() {
         <BrowserRouter>
         <div className="App">
             <h1>Product Manager</h1>
-            <Link to="/products">Dashboard</Link>
+            <Link to="/">Dashboard</Link>
 
             <Routes>
-                <Route path="/products" element={<Dashboard />} />
+                <Route path="/" element={<Dashboard />} />
                 <Route path="/products/:id" element={<Detail />} />
             </Routes>
 
